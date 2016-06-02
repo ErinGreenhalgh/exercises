@@ -5,9 +5,13 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   def most_recent_tool
-    if Tool.exists?(id: session[:most_recent_tool_id])
-      Tool.find(session[:most_recent_tool_id]).name
+    if Tool.all.count > 0
+      Tool.all.last
+    else
+      Tool.new(name: "There are currently no tools")
     end
+
+    # current_user.tools ||= Tool.new(name: "You currently do not have any tools")
   end
 
   def current_user

@@ -12,9 +12,9 @@
   <%= content_tag :div, message, class: "flash_#{type}" %>
 <% end  %>
 
-<p>
+<!-- <p>
   <strong> Newest Tool:</strong> <%= most_recent_tool %>
-</p>
+</p> -->
 
 <% if current_user %>
   <%= link_to "Log Out", logout_path, method: :delete %>
