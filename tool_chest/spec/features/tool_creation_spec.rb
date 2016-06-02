@@ -3,7 +3,6 @@ require 'rails_helper'
 RSpec.feature do
 #another way to write it: RSpec.describe "Tool management", type: :feature
   scenario "user creates a new tool" do
-    pending
     visit new_tool_path
 
     fill_in "Name", with: "Screwdriver"
@@ -18,20 +17,19 @@ RSpec.feature do
     #flipped from minitest assertions
     #this thing we created will be the last thing in the db so we can find it that way
 
-    within(".tool_info li:nth-child(1)") do
+    within("h1") do
       #we are expecting to find a tool info class on the page
       #can scope down further and further (".tool_info li")
       #(".tool_info li:nth-child(1)") ==> find the first item in the list w/in class tool_info
       expect(page).to have_content("Screwdriver")
+      expect(page).to have_content("InStock: 10")
     end
 
-    within(".tool_info li:nth-child(2)") do
+    within("h3") do
       expect(page).to have_content("$10.99")
     end
 
-    within(".tool_info li:nth-child(3)") do
-      expect(page).to have_content("InStock: 10")
-    end #easy to get false positives, lets say if user ID is displayed on the page and it happens to be 10
+   #easy to get false positives, lets say if user ID is displayed on the page and it happens to be 10
 
     #pseudocode test:
       #visit a page with the form to create a new tool
